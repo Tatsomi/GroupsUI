@@ -40,7 +40,7 @@ class Main extends PluginBase implements Listener
 
     public function openGroupUI($player): void
     {
-        $form = new SimpleForm(function (Player $player, int $data = null) {
+        $form = new SimpleForm(function (Player $player, $data = null) {
 
             $result = $data;
             if ($result === null) {
@@ -75,7 +75,7 @@ class Main extends PluginBase implements Listener
 
     public function openRCUI($player): void
     {
-        $form = new SimpleForm(function (Player $player, int $data = null) {
+        $form = new SimpleForm(function (Player $player, $data = null) {
             $result = $data;
             if ($result === null) {
                 return;
@@ -103,7 +103,7 @@ class Main extends PluginBase implements Listener
 
     public function openCreateUI($player): void
     {
-        $form = new CustomForm(function (Player $player, array $data = null) {
+        $form = new CustomForm(function (Player $player, $data = null) {
 
             if (isset($data[0])) {
                 $this->getServer()->getCommandMap()->dispatch($player, "addgroup $data[0]");
@@ -117,7 +117,7 @@ class Main extends PluginBase implements Listener
     }
     public function openRemoveUI($player): void
     {
-        $form = new CustomForm(function (Player $player, array $data = null) {
+        $form = new CustomForm(function (Player $player, $data = null) {
 
             if (isset($data[0])) {
                 $this->getServer()->getCommandMap()->dispatch($player, "rmgroup $data[0]");
@@ -134,7 +134,7 @@ class Main extends PluginBase implements Listener
 
     public function openNFUI($player): void
     {
-        $form = new SimpleForm(function (Player $player, int $data = null) {
+        $form = new SimpleForm(function (Player $player, $data = null) {
             $result = $data;
             if ($result === null) {
                 return;
@@ -161,7 +161,7 @@ class Main extends PluginBase implements Listener
     }
     public function openNametagUI($player): void
     {
-        $form = new CustomForm(function (Player $player, array $data = null) {
+        $form = new CustomForm(function (Player $player, $data = null) {
             if (isset($data[1])) {
                 $groups = $this->glist();
                 $this->getServer()->getCommandMap()->dispatch($player, "setnametag " . $groups[$data[1]] . " global " . $data[2]);
@@ -178,7 +178,7 @@ class Main extends PluginBase implements Listener
     }
     public function openFormatUI($player): void
     {
-        $form = new CustomForm(function (Player $player, array $data = null) {
+        $form = new CustomForm(function (Player $player, $data = null) {
 
             if (isset($data[1])) {
                 $groups = $this->glist();
@@ -197,7 +197,7 @@ class Main extends PluginBase implements Listener
 
     public function openPermsUI($player): void
     {
-        $form = new SimpleForm(function (Player $player, int $data = null) {
+        $form = new SimpleForm(function (Player $player, $data = null) {
             $result = $data;
             if ($result === null) {
                 return;
@@ -224,7 +224,7 @@ class Main extends PluginBase implements Listener
     }
     public function openPaddUI($player): void
     {
-        $form = new CustomForm(function (Player $player, array $data = null) {
+        $form = new CustomForm(function (Player $player, $data = null) {
 
             if (isset($data[0])) {
                 $groups = $this->glist();
@@ -244,7 +244,7 @@ class Main extends PluginBase implements Listener
 
     public function openPremUI($player): void
     {
-        $form = new CustomForm(function (Player $player, array $data = null) {
+        $form = new CustomForm(function (Player $player, $data = null) {
             if ($data === null) return;
             if (isset($data[1])) {
                 $groups = $this->glist();
@@ -263,7 +263,7 @@ class Main extends PluginBase implements Listener
     }
     public function openARPUI($player): void
     {
-        $form = new SimpleForm(function (Player $player, int $data = null) {
+        $form = new SimpleForm(function (Player $player, $data = null) {
             $result = $data;
             if ($result === null) {
                 return;
@@ -286,7 +286,7 @@ class Main extends PluginBase implements Listener
     }
     public function openPLaddUI($player): void
     {
-        $form = new CustomForm(function (Player $player, array $data = null) {
+        $form = new CustomForm(function (Player $player, $data = null) {
 
             if (isset($data[1])) {
                 $groups = $this->glist();
