@@ -1,11 +1,15 @@
 name: GroupsUI
 main: ChampOfGames\GroupsUI\Main
-author: ChampOfGames
-version: 1.0.0
-api: 3.0.0
-  
-  
+authors:
+  - ChampOfGames
+  - Tatsomi
+version: 1.0.1
+api: 5.0.0
+
 commands:
   groupsui:
+    permission: groupsui.cmd
     description: Manage Groups with an UI
-    usage: /groupsui
+permissions:
+  groupsui.cmd:
+    default: op

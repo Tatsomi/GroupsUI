@@ -9,13 +9,13 @@ use jojoe77777\FormAPI\CustomForm;
 use jojoe77777\FormAPI\SimpleForm;
 use _64FF00\PurePerms\PurePerms;
 use pocketmine\Server;
-use pocketmine\Player;
+use pocketmine\player\Player;
 use pocketmine\event\Listener;
 
 class Main extends PluginBase implements Listener
 {
-    public $check = true;
-    public function glist()
+    public bool $check = true;
+    public function glist(): array
     {
 
         $groups = array();
@@ -27,7 +27,7 @@ class Main extends PluginBase implements Listener
         }
         return $groups;
     }
-    public function PName()
+    public function PName(): array
     {
         $list = array();
         foreach (Server::getInstance()->getOnlinePlayers() as $players) {
@@ -38,13 +38,13 @@ class Main extends PluginBase implements Listener
     }
 
 
-    public function openGroupUI($player)
+    public function openGroupUI($player): void
     {
         $form = new SimpleForm(function (Player $player, int $data = null) {
 
             $result = $data;
             if ($result === null) {
-                return true;
+                return;
             }
             switch ($result) {
                 case 0:
@@ -69,16 +69,16 @@ class Main extends PluginBase implements Listener
         $form->addButton("§2Add §ror §4remove §ra permission for a group");
         $form->addButton("§2Change §rthe group of a player.");
         $form->addButton("Close");
+
         $form->sendToPlayer($player);
-        return $form;
     }
 
-    public function openRCUI($player)
+    public function openRCUI($player): void
     {
         $form = new SimpleForm(function (Player $player, int $data = null) {
             $result = $data;
             if ($result === null) {
-                return true;
+                return;
             }
             switch ($result) {
                 case 0:
@@ -97,52 +97,47 @@ class Main extends PluginBase implements Listener
         $form->addButton("Create a group.");
         $form->addButton("Remove a group");
         $form->addButton("Go back");
+
         $form->sendToPlayer($player);
-        return $form;
     }
 
-    public function openCreateUI($player)
+    public function openCreateUI($player): void
     {
         $form = new CustomForm(function (Player $player, array $data = null) {
 
             if (isset($data[0])) {
-                $this->getServer()->getCommandMap()->dispatch($player, "addgroup '$data[0]'");
-                $this->openGroupUI($player);
-            } else {
-                $this->openGroupUI($player);
+                $this->getServer()->getCommandMap()->dispatch($player, "addgroup $data[0]");
             }
+            $this->openGroupUI($player);
         });
 
         $form->setTitle("GroupsUI");
         $form->addInput("Create a group.");
         $form->sendToPlayer($player);
-        return $form;
     }
-    public function openRemoveUI($player)
+    public function openRemoveUI($player): void
     {
         $form = new CustomForm(function (Player $player, array $data = null) {
 
             if (isset($data[0])) {
-                $this->getServer()->getCommandMap()->dispatch($player, "rmgroup '$data[0]");
-                $this->openGroupUI($player);
-            } else {
-                $this->openGroupUI($player);
+                $this->getServer()->getCommandMap()->dispatch($player, "rmgroup $data[0]");
             }
+            $this->openGroupUI($player);
         });
 
         $form->setTitle("GroupsUI");
         $form->addInput("Remove a group.");
+
         $form->sendToPlayer($player);
-        return $form;
     }
 
 
-    public function openNFUI($player)
+    public function openNFUI($player): void
     {
         $form = new SimpleForm(function (Player $player, int $data = null) {
             $result = $data;
             if ($result === null) {
-                return true;
+                return;
             }
             switch ($result) {
                 case 0:
@@ -161,55 +156,51 @@ class Main extends PluginBase implements Listener
         $form->addButton("Edit the nametag of a group.");
         $form->addButton("Edit the format of a group.");
         $form->addButton("Go back");
+
         $form->sendToPlayer($player);
-        return $form;
     }
-    public function openNametagUI($player)
+    public function openNametagUI($player): void
     {
         $form = new CustomForm(function (Player $player, array $data = null) {
             if (isset($data[1])) {
                 $groups = $this->glist();
                 $this->getServer()->getCommandMap()->dispatch($player, "setnametag " . $groups[$data[1]] . " global " . $data[2]);
-                $this->openGroupUI($player);
-            } else {
-                $this->openGroupUI($player);
             }
+            $this->openGroupUI($player);
         });
 
         $form->setTitle("GroupsUI");
         $form->addLabel("Available PureChat tags: {display_name}, {msg}, {fac_name}, {fac_rank}, {prefix}, {suffix}, {world}.");
         $form->addDropdown("Available Groups.", $this->glist());
         $form->addInput("Edit the nametag.");
+
         $form->sendToPlayer($player);
-        return $form;
     }
-    public function openFormatUI($player)
+    public function openFormatUI($player): void
     {
         $form = new CustomForm(function (Player $player, array $data = null) {
 
             if (isset($data[1])) {
                 $groups = $this->glist();
                 $this->getServer()->getCommandMap()->dispatch($player, "setformat " . $groups[$data[1]] . " global " . $data[2]);
-                $this->openGroupUI($player);
-            } else {
-                $this->openGroupUI($player);
             }
+            $this->openGroupUI($player);
         });
 
         $form->setTitle("GroupsUI");
         $form->addLabel("Available PureChat tags: {display_name}, {msg}, {fac_name}, {fac_rank}, {prefix}, {suffix}, {world}.");
         $form->addDropdown("Available Groups.", $this->glist());
         $form->addInput("Edit the format of a group.");
+
         $form->sendToPlayer($player);
-        return $form;
     }
 
-    public function openPermsUI($player)
+    public function openPermsUI($player): void
     {
         $form = new SimpleForm(function (Player $player, int $data = null) {
             $result = $data;
             if ($result === null) {
-                return true;
+                return;
             }
             switch ($result) {
                 case 0:
@@ -228,10 +219,10 @@ class Main extends PluginBase implements Listener
         $form->addButton("§2Add §ra permission to a group.");
         $form->addButton("§4Remove §ra permission from a group.");
         $form->addButton("Go back");
+
         $form->sendToPlayer($player);
-        return $form;
     }
-    public function openPaddUI($player)
+    public function openPaddUI($player): void
     {
         $form = new CustomForm(function (Player $player, array $data = null) {
 
@@ -247,11 +238,11 @@ class Main extends PluginBase implements Listener
         $form->setTitle("GroupsUI");
         $form->addDropdown("Available Groups.", $this->glist());
         $form->addInput("Enter the permission that you want to add.");
+
         $form->sendToPlayer($player);
-        return $form;
     }
 
-    public function openPremUI($player)
+    public function openPremUI($player): void
     {
         $form = new CustomForm(function (Player $player, array $data = null) {
             if ($data === null) return;
@@ -259,25 +250,23 @@ class Main extends PluginBase implements Listener
                 $groups = $this->glist();
 
                 $this->getServer()->getCommandMap()->dispatch($player, "unsetgperm " . $groups[$data[1]] . " " . $data[2]);
-                $this->openGroupUI($player);
-            } else {
-                $this->openGroupUI($player);
             }
+            $this->openGroupUI($player);
         });
 
         $form->setTitle("GroupsUI");
         $form->addLabel("");
         $form->addDropdown("Available Groups.", $this->glist());
         $form->addInput("Enter the permission that you want to remove.");
+
         $form->sendToPlayer($player);
-        return $form;
     }
-    public function openARPUI($player)
+    public function openARPUI($player): void
     {
         $form = new SimpleForm(function (Player $player, int $data = null) {
             $result = $data;
             if ($result === null) {
-                return true;
+                return;
             }
             switch ($result) {
                 case 0:
@@ -292,44 +281,35 @@ class Main extends PluginBase implements Listener
         $form->setTitle("GroupsUI");
         $form->addButton("§2Change §rthe group of a player.");
         $form->addButton("Go back");
+
         $form->sendToPlayer($player);
-        return $form;
     }
-    public function openPLaddUI($player)
+    public function openPLaddUI($player): void
     {
         $form = new CustomForm(function (Player $player, array $data = null) {
 
             if (isset($data[1])) {
                 $groups = $this->glist();
                 $ps = $this->PName();
-$player = $ps[$data[1]];
-                $this->getServer()->getCommandMap()->dispatch($player, "setgroup '$player' " . $groups[$data[2]]);
-                $this->openGroupUI($player);
-            } else {
-                $this->openGroupUI($player);
+
+                $this->getServer()->getCommandMap()->dispatch($player, "setgroup " . $ps[$data[1]] . " " . $groups[$data[2]]);
             }
+            $this->openGroupUI($player);
         });
 
         $form->setTitle("GroupsUI");
         $form->addLabel("");
         $form->addDropdown("Online player.", $this->PName());
         $form->addDropdown("Available Groups.", $this->glist());
+
         $form->sendToPlayer($player);
-        return $form;
     }
 
-    public function onCommand(CommandSender $sender, Command $cmd, string $label, array $args): bool
+    public function onCommand(CommandSender $sender, Command $command, string $label, array $args): bool
     {
-        if ($cmd->getName() === "groupsui") {
+        if ($command->getName() === "groupsui") {
             if ($sender instanceof Player) {
-                if($sender->hasPermission("groupsui.use")){
-                    $this->openGroupUI($sender);
-                }else{
-                    $sender->sendMessage("§bGroupsUI §6>> §4You are not allowed to use this command.");
-                } 
-            }else{
-                $sender->sendMessage("§bGroupsUI §6>> §4Please use the command ingame.");
-                
+                $this->openGroupUI($sender);
             }
         }
         return true;
