@@ -9,7 +9,7 @@ Manage Groups with an UI.
 
 ## Want to report something or you have an idea?
 
-Just open an [issue](https://github.com/ChampOfGames/GroupsUI/issues).
+Just open an [issue](https://github.com/Tatsomi/GroupsUI/issues).
 
 ## Dependencies
  - PurePerms
