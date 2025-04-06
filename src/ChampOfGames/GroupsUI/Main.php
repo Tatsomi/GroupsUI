@@ -7,7 +7,6 @@ use pocketmine\command\CommandSender;
 use pocketmine\command\Command;
 use jojoe77777\FormAPI\CustomForm;
 use jojoe77777\FormAPI\SimpleForm;
-use _64FF00\PurePerms\PurePerms;
 use pocketmine\Server;
 use pocketmine\player\Player;
 use pocketmine\event\Listener;
@@ -70,7 +69,7 @@ class Main extends PluginBase implements Listener
         $form->addButton("§2Change §rthe group of a player.");
         $form->addButton("Close");
 
-        $form->sendToPlayer($player);
+        $player->sendForm($form);
     }
 
     public function openRCUI($player): void
@@ -98,7 +97,7 @@ class Main extends PluginBase implements Listener
         $form->addButton("Remove a group");
         $form->addButton("Go back");
 
-        $form->sendToPlayer($player);
+        $player->sendForm($form);
     }
 
     public function openCreateUI($player): void
@@ -113,7 +112,7 @@ class Main extends PluginBase implements Listener
 
         $form->setTitle("GroupsUI");
         $form->addInput("Create a group.");
-        $form->sendToPlayer($player);
+        $player->sendForm($form);
     }
     public function openRemoveUI($player): void
     {
@@ -128,7 +127,7 @@ class Main extends PluginBase implements Listener
         $form->setTitle("GroupsUI");
         $form->addInput("Remove a group.");
 
-        $form->sendToPlayer($player);
+        $player->sendForm($form);
     }
 
 
@@ -157,7 +156,7 @@ class Main extends PluginBase implements Listener
         $form->addButton("Edit the format of a group.");
         $form->addButton("Go back");
 
-        $form->sendToPlayer($player);
+        $player->sendForm($form);
     }
     public function openNametagUI($player): void
     {
@@ -174,7 +173,7 @@ class Main extends PluginBase implements Listener
         $form->addDropdown("Available Groups.", $this->glist());
         $form->addInput("Edit the nametag.");
 
-        $form->sendToPlayer($player);
+        $player->sendForm($form);
     }
     public function openFormatUI($player): void
     {
@@ -192,7 +191,7 @@ class Main extends PluginBase implements Listener
         $form->addDropdown("Available Groups.", $this->glist());
         $form->addInput("Edit the format of a group.");
 
-        $form->sendToPlayer($player);
+        $player->sendForm($form);
     }
 
     public function openPermsUI($player): void
@@ -220,7 +219,7 @@ class Main extends PluginBase implements Listener
         $form->addButton("§4Remove §ra permission from a group.");
         $form->addButton("Go back");
 
-        $form->sendToPlayer($player);
+        $player->sendForm($form);
     }
     public function openPaddUI($player): void
     {
@@ -239,7 +238,7 @@ class Main extends PluginBase implements Listener
         $form->addDropdown("Available Groups.", $this->glist());
         $form->addInput("Enter the permission that you want to add.");
 
-        $form->sendToPlayer($player);
+        $player->sendForm($form);
     }
 
     public function openPremUI($player): void
@@ -259,7 +258,7 @@ class Main extends PluginBase implements Listener
         $form->addDropdown("Available Groups.", $this->glist());
         $form->addInput("Enter the permission that you want to remove.");
 
-        $form->sendToPlayer($player);
+        $player->sendForm($form);
     }
     public function openARPUI($player): void
     {
@@ -282,7 +281,7 @@ class Main extends PluginBase implements Listener
         $form->addButton("§2Change §rthe group of a player.");
         $form->addButton("Go back");
 
-        $form->sendToPlayer($player);
+        $player->sendForm($form);
     }
     public function openPLaddUI($player): void
     {
@@ -302,7 +301,7 @@ class Main extends PluginBase implements Listener
         $form->addDropdown("Online player.", $this->PName());
         $form->addDropdown("Available Groups.", $this->glist());
 
-        $form->sendToPlayer($player);
+        $player->sendForm($form);
     }
 
     public function onCommand(CommandSender $sender, Command $command, string $label, array $args): bool
